@@ -31,11 +31,7 @@ export default function App() {
   );
 
   // ---- filters (your v5) ----
-  const [filters, setFilters] = useState({
-    q: "",
-    publisher: "ALL",
-    language: "ALL",
-  });
+  const [filters, setFilters] = useState({ q: "", publisher: "ALL", language: "ALL" });
   const publishers = useMemo(() => {
     const set = new Set(items.map((b) => b.publisher).filter(Boolean));
     return ["ALL", ...Array.from(set).sort()];
@@ -48,13 +44,9 @@ export default function App() {
     const q = filters.q.trim().toLowerCase();
     return items.filter((b) => {
       const matchesQ =
-        !q ||
-        b.title?.toLowerCase().includes(q) ||
-        b.author?.toLowerCase().includes(q);
-      const matchesPublisher =
-        filters.publisher === "ALL" || b.publisher === filters.publisher;
-      const matchesLanguage =
-        filters.language === "ALL" || b.language === filters.language;
+        !q || b.title?.toLowerCase().includes(q) || b.author?.toLowerCase().includes(q);
+      const matchesPublisher = filters.publisher === "ALL" || b.publisher === filters.publisher;
+      const matchesLanguage = filters.language === "ALL" || b.language === filters.language;
       return matchesQ && matchesPublisher && matchesLanguage;
     });
   }, [items, filters]);
@@ -78,17 +70,10 @@ export default function App() {
   const [view, setView] = useState("catalog"); // "catalog" | "loans"
 
   // ---- handlers you already have (examples shown briefly) ----
-  const openAdd = () => {
-    /* your existing add modal open */
-  };
-  const openEdit = () => {
-    /* your existing edit modal open */
-  };
-  const handleDeleteSelected = () => {
-    /* your existing delete book */
-  };
-  const handleToggleSelect = (id) =>
-    setSelectedId((p) => (p === id ? null : id));
+  const openAdd = () => {/* your existing add modal open */};
+  const openEdit = () => {/* your existing edit modal open */};
+  const handleDeleteSelected = () => {/* your existing delete book */};
+  const handleToggleSelect = (id) => setSelectedId((p) => (p === id ? null : id));
 
   // ---- loan create ----
   const handleCreateLoan = (loan) => {
@@ -141,21 +126,14 @@ export default function App() {
               publishers={publishers}
               languages={languages}
               onChange={(next) => setFilters((f) => ({ ...f, ...next }))}
-              onReset={() =>
-                setFilters({ q: "", publisher: "ALL", language: "ALL" })
-              }
+              onReset={() => setFilters({ q: "", publisher: "ALL", language: "ALL" })}
             />
 
             <div className="grid-wrapper">
               <aside className="add-col">
                 <AddCard onClick={openAdd} />
                 <div className="actions">
-                  <button
-                    className="action-btn"
-                    type="button"
-                    onClick={openEdit}
-                    disabled={!selected}
-                  >
+                  <button className="action-btn" type="button" onClick={openEdit} disabled={!selected}>
                     Update
                   </button>
                   <button
@@ -176,7 +154,7 @@ export default function App() {
                     book={b}
                     selected={b.id === selectedId}
                     onToggle={() => handleToggleSelect(b.id)}
-                    onLoan={loanedIds.has(b.id)}
+                    onLoan={loanedIds.has(b.id)}    {/* NEW: loan flag */}
                   />
                 ))}
               </section>

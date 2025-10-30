@@ -254,6 +254,8 @@ body {
   border-radius: 8px;
   font: inherit;
 }
+.form-spacer {
+}
 
 .modal-actions {
   grid-column: 1 / -1;
