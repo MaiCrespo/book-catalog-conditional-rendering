@@ -4,7 +4,6 @@ import Book from "./components/book.jsx";
 import AddCard from "./components/AddCard";
 import FilterBar from "./components/FilterBar.jsx";
 import LoanManager from "./components/LoanManager.jsx";
-import BookModal from "./components/BookModal";
 
 const LS_BOOKS = "bookCatalogV5";
 const LS_LOANS = "bookCatalogV6_loans";
